@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Atlas Chrome Extension</title>
+    <!-- Favicon -->
+    <link rel="icon" href="logo.png" type="image/png">
+
+    <style>
+
+/* General styles for responsiveness */
+@media (max-width: 1024px) {
+    .header {
+        flex-direction: column; /* Stack elements vertically */
+        align-items: center; /* Center elements horizontally */
+        padding: 20px;
+    }
+
+    .header-left, .header-right {
+        flex: 1;
+        width: 100%; /* Make both sections full width */
+        margin-bottom: 20px;
+        padding-left: 0;
+        align-items: center; /* Center content horizontally */
+        justify-content: center; /* Center content vertically */
+        text-align: center; /* Center text content */
+    }
+
+    .button-group-header {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 10px; /* Add more space between buttons */
+        margin-left: 0;
+        align-items: center; /* Center buttons */
+    }
+
+    .features {
+        grid-template-columns: 1fr; /* Use a single column layout */
+        padding: 10px;
+    }
+
+    .learn-more-popup {
+        width: 90%; /* Adjust width for smaller screens */
+        left: 5%; /* Center the popup */
+        top: auto; /* Adjust the positioning */
+        transform: none; /* Reset transform */
+    }
+
+    .subscription-popup {
+        width: 90%; /* Make the popup width responsive */
+        right: -100%; /* Start hidden offscreen */
+    }
+
+    .subscription-popup.active {
+        right: 5%; /* Show the popup within the viewport */
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: center; /* Center elements horizontally */
+        padding: 20px;
+    }
+
+    .header-left, .header-right {
+        flex: 1;
+        width: 100%;
+        margin-bottom: 20px;
+        padding-left: 0;
+        align-items: center; /* Center content horizontally */
+        justify-content: center; /* Center content vertically */
+        text-align: center; /* Center text content */
+    }
+
+    .title {
+        font-size: 1.5rem; /* Adjust title size */
+    }
+
+    .button-group-header {
+        flex-direction: column;
+        gap: 10px; /* Add more space between buttons */
+        align-items: center; /* Center buttons */
+    }
+
+    .features {
+        grid-template-columns: 1fr; /* Stack features vertically */
+        padding: 10px;
+    }
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.2rem; /* Smaller title for mobile */
+    }
+
+    .subtitle {
+        font-size: 0.9rem; /* Smaller subtitle */
+    }
+
+    .header-left {
+        align-items: center; /* Center elements horizontally */
+        justify-content: center; /* Center elements vertically */
+        text-align: center; /* Center text content */
+    }
+
+    .button-group-header .button {
+        font-size: 0.8rem; /* Smaller button text */
+        padding: 6px 12px; /* Reduce button padding */
+    }
+
+    .button-group-header {
+        align-items: center; /* Center buttons */
+    }
+
+    .features {
+        padding: 5px;
+        gap: 5px; /* Reduce gap between features */
+    }
+
+    .feature h2 {
+        font-size: 0.8rem; /* Smaller feature title */
+    }
+
+    .feature p {
+        font-size: 0.65rem; /* Smaller feature text */
+    }
+}
+
+
+
+/*media*/
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+            color: #000;
+            background-color: #fff;
+            margin: 0;
+            overflow-x: hidden;
+
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+.header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: transparent; /* Make the background transparent */
+    color: #fff;
+    padding: 40px 20px;
+    text-align: left;
+    width: 100%;
+    margin-bottom: 0; /* Ensure no margin at the bottom of the header */
+}
+
+        .header-left {
+            flex: 0.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 40px;
+            margin-bottom: 20px;
+        }
+
+
+
+        .logo {
+            max-width: 150px;
+            margin: 0 auto 10px auto;
+            display: block;
+        }
+
+        .title,
+        .subtitle,
+        .button-group-header {
+            align-self: flex-start;
+            margin-left: 20px;
+        }
+
+        .title {
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-size: 1.8rem;
+            margin-top: 0;
+        }
+
+        .subtitle {
+            font-family: "Courier New", Courier, monospace;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .button-group-header {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .button-group-header .button {
+            background-color: #111;
+            color: #fff;
+            padding: 8px 16px;
+            text-decoration: none;
+            border: 1px solid #333;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background-color 0.3s;
+        }
+
+        .button-group-header .button:hover {
+            background-color: #333;
+        }
+
+.learn-more-popup {
+    position: absolute;
+    top: 52%; /* Position it right underneath the left header */
+    left: 80px; /* Adjust the left position to align under the left header */
+    width: 480px; /* Set the desired width of the rectangle */
+    background-color: #000; /* Keep the background color */
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px; /* Optional: rounded corners */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    z-index: 5;
+}
+
+
+
+        .learn-more-popup.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+.header-right {
+    flex: 1.1;
+    padding-left: 20px;
+    margin-left: 0;
+    background-color: transparent; /* Make the background transparent */
+}
+
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    background-color: transparent; /* Make the background transparent */
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+
+        .feature {
+            background-color: #111;
+            border: 1px solid #333;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 0.75rem;
+            transition: background-color 0.3s;
+        }
+
+        .feature h2 {
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .feature p {
+            font-family: "Courier New", Courier, monospace;
+            font-size: 0.7rem;
+            color: #ccc;
+        }
+
+.slider-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1; /* Adjust the z-index if necessary */
+}
+
+.slider-video {
+    width: 120%; /* Increase the width to zoom in */
+    height: 120%; /* Increase the height to zoom in */
+    position: absolute;
+    top: -10%; /* Adjust the top position to center the video */
+    left: -10%; /* Adjust the left position to center the video */
+    border: none;
+}
+
+.page-container {
+    flex: 1; /* Makes the main content area grow to fill the available space */
+}
+
+
+        .subscription-popup {
+            position: fixed;
+            top: 50%;
+            right: -400px;
+            transform: translateY(-50%);
+            width: 300px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            transition: right 0.3s;
+            text-align: left;
+            z-index: 10;
+        }
+
+        .subscription-popup.active {
+            right: 20px;
+        }
+
+        .subscription-popup h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .subscription-popup input[type="email"] {
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .subscription-popup button {
+            background-color: #000;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+            margin-bottom: 10px;
+        }
+
+        .subscription-popup button:hover {
+            background-color: #555;
+        }
+
+        .close-popup {
+            background: none;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            color: #000;
+        }
+
+.footer {
+  
+    color: #fff; /* Change the font color to white */
+    text-align: center;
+    padding: 10px;
+    margin-top: auto; /* Pushes the footer to the bottom */
+}
+
+        /* Media Queries for Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 20px;
+            }
+
+            .header-left, .header-right {
+                flex: 1;
+                width: 100%;
+                margin-bottom: 20px;
+                padding-left: 0;
+            }
+
+            .logo {
+                max-width: 120px;
+            }
+
+            .title {
+                font-size: 1.5rem;
+            }
+
+            .button-group-header {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-left: 0;
+                gap: 5px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+
+            .subscription-popup {
+                width: 90%;
+                right: -100%;
+            }
+
+            .subscription-popup.active {
+                right: 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+    <header class="header">
+        <div class="header-left">
+            <!-- <img src="logo.png" alt="Fashion Atlas Logo" class="logo"> -->
+            <h1 class="title">FASHION ATLAS</h1>
+            <p class="subtitle">The ultimate Google Chrome extension for fashion analysis.</p>
+            <div class="button-group-header">
+                <button class="button" onclick="toggleLearnMore()">Learn More</button>
+                <button class="button">Add to Chrome</button>
+                <button class="button">Support</button>
+                <button class="button">Join the Team</button>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="features">
+                <div class="feature">
+                    <h2>Color Season Analysis</h2>
+                    <p>Quickly discover the perfect color season for your wardrobe with a simple right-click.</p>
+                </div>
+                <div class="feature">
+                    <h2>Cost Analysis</h2>
+                    <p>Evaluate your fashion investments by calculating cost per wear effortlessly.</p>
+                </div>
+                <div class="feature">
+                    <h2>Fabric Analysis</h2>
+                    <p>Get insights into fabric quality and composition to make better style choices.</p>
+                </div>
+                <div class="feature">
+                    <h2>Use Suggestions</h2>
+                    <p>Receive tailored outfit recommendations to maximize your wardrobe’s potential for any occasion.</p>
+                </div>
+                <div class="feature">
+                    <h2>Fashion History</h2>
+                    <p>Learn the history and cultural significance behind your favorite fashion items.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Learn More Popup -->
+        <div class="learn-more-popup" id="learnMorePopup">
+            <h3>ABOUT</h3>
+            <p>With a right-click, Fashion Atlas changes how you think about shopping and getting dressed.  Learn which shades truly work for you. Calculate the cost per wear to see if that splurge is actually worth it, and check fabric quality to understand how a piece will hold up over time. To add even more depth, uncover interesting facts about the history and cultural roots of your favorite styles, making your fashion choices a little more meaningful and a little more fun.</p>
+        </div>
+    </header>
+
+<!-- Video Slider Section -->
+
+<div class="slider-container">
+    <iframe class="slider-video"
+            src="https://www.youtube.com/embed/NzNlQLxx1rc?autoplay=1&controls=0&loop=1&playlist=NzNlQLxx1rc&modestbranding=1&iv_load_policy=3&rel=0&mute=1"
+            frameborder="0"
+            allow="autoplay; fullscreen; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+    </iframe>
+</div>
+
+
+
+
+
+
+    <main class="main">
+        <!-- Subscription Pop-up -->
+        <div class="subscription-popup" id="subscriptionPopup">
+            <h3>Stay Updated</h3>
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+            <button class="close-popup" onclick="closePopup()">×</button>
+        </div>
+    </main>
+
+</div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Fashion Atlas. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Show the Learn More popup
+        function toggleLearnMore() {
+            const learnMorePopup = document.getElementById('learnMorePopup');
+            learnMorePopup.classList.toggle('active');
+        }
+
+        // Show the subscription pop-up after 5 seconds
+        setTimeout(function() {
+            const popup = document.getElementById('subscriptionPopup');
+            popup.classList.add('active');
+        }, 5000);
+
+        // Function to close the subscription pop-up
+        function closePopup() {
+            const popup = document.getElementById('subscriptionPopup');
+            popup.classList.remove('active');
+        }
+    </script>
+</body>
+</html>
