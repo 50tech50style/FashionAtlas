@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FashionAtlas Support Page</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <style>
+        /* General styles */
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    color: #fff;
+    background-color: #121212;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.header {
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.header h1 {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 1.4rem; /* Smaller font size for title */
+    margin-bottom: 5px;
+}
+
+.header p {
+    font-size: 0.85rem; /* Smaller font size */
+    margin-bottom: 20px;
+    color: #ccc;
+    font-weight: normal;
+}
+
+.content {
+    padding: 30px;
+    flex: 1;
+    max-width: 800px;
+    text-align: left;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.content h2 {
+    font-size: 1.1rem; /* Smaller font size for section titles */
+    font-weight: bold;
+    margin-top: 20px;
+    color: #f5f5f5;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+}
+
+.content p, .content li {
+    font-size: 0.8rem; /* Smaller font size for regular text */
+    margin-bottom: 10px;
+    color: #ddd;
+    font-weight: normal; /* Regular weight for body text */
+}
+
+.content ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-left: 15px;
+}
+
+.content ul li::before {
+    content: "• ";
+    color: #999;
+    font-weight: bold;
+}
+
+.content ol {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.content ol li {
+    margin-bottom: 10px;
+    color: #bbb;
+}
+
+.faq-section {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.question {
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 5px;
+    font-size: 0.85rem; /* Smaller font for questions */
+}
+
+.answer {
+    color: #ccc;
+    margin-bottom: 10px;
+    font-size: 0.8rem; /* Regular smaller font for answers */
+    font-weight: normal;
+}
+
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color: transparent;
+    color: #fff;
+    font-size: 0.75rem; /* Smaller font for footer */
+}
+
+.button {
+    display: block;
+    width: 100%;
+    background-color: #111;
+    color: #fff;
+    padding: 10px 0; /* Slightly smaller padding */
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.85rem; /* Smaller font for button */
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+    box-sizing: border-box;
+}
+
+.button:hover {
+    background-color: #333;
+}
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>FashionAtlas Support Page</h1>
+        <p>Welcome to the FashionAtlas Support Page! Here, you’ll find all the information you need to get started, <br /> troubleshoot, and make the most of your FashionAtlas Chrome extension.</p>
+    </header>
+    <main class="content">
+        <h2>1. What is FashionAtlas?</h2>
+        <p>FashionAtlas is a personal color and fabric analysis tool designed to help you make more informed style choices. With a simple right-click on an image, FashionAtlas helps you:</p>
+        <ul>
+            <li>Determine an item’s color season and styling recommendations based on color theory.</li>
+            <li>Analyze fabric details, including material and potential durability.</li>
+            <li>Decide on alterations or adjustments for a better fit.</li>
+        </ul>
+
+        <h2>2. Getting Started</h2>
+        <p><strong>Installation</strong></p>
+        <p>Visit the FashionAtlas listing on the Chrome Web Store. Click Add to Chrome and confirm the permissions required to install the extension.</p>
+
+        <p><strong>Permissions Overview</strong></p>
+        <p>FashionAtlas needs a few permissions to operate effectively:</p>
+        <ul>
+            <li><strong>activeTab:</strong> To analyze images on your active tab when you choose to do so.</li>
+            <li><strong>scripting:</strong> To run local scripts for image and fabric analysis.</li>
+            <li><strong>storage:</strong> To save your preferences and analysis history locally on your device.</li>
+            <li><strong>contextMenus:</strong> To add options to your right-click menu for quick image analysis.</li>
+        </ul>
+        <p>These permissions are essential for FashionAtlas to provide its services, but none of your data is collected or shared externally.</p>
+
+        <p><strong>Using FashionAtlas</strong></p>
+        <ul>
+            <li><strong>Color Analysis:</strong> Right-click any image online, then select "Identify Your Seasonal Color" from the FashionAtlas context menu. A color analysis result will appear in a side panel, showing you the color season classification and styling advice.</li>
+            <li><strong>Fabric Analysis:</strong> If applicable, select “Analyze Fabric” from the right-click menu to view insights about the fabric’s composition.</li>
+        </ul>
+
+        <h2>3. Frequently Asked Questions (FAQ)</h2>
+        <p><strong>Q:</strong> Does FashionAtlas collect my personal information?</p>
+        <p><strong>A:</strong> No, FashionAtlas processes all data locally on your device and does not collect, transmit, or store any personal information.</p>
+
+        <p><strong>Q:</strong> Why does FashionAtlas need permission to access my tabs?</p>
+        <p><strong>A:</strong> FashionAtlas requires activeTab and scripting permissions to perform image analysis on the page you are viewing. These permissions are limited to the tab you choose to analyze, and the data does not leave your device.</p>
+
+        <p><strong>Q:</strong> Can I save my analysis results?</p>
+        <p><strong>A:</strong> Yes, FashionAtlas saves your preferences locally using Chrome’s storage API so that you can revisit past analyses. This information is only accessible on your device.</p>
+
+        <p><strong>Q:</strong> How do I update FashionAtlas?</p>
+        <p><strong>A:</strong> Chrome automatically updates all extensions. To check for updates manually, go to chrome://extensions, enable Developer mode, and click Update.</p>
+
+        <h2>4. Troubleshooting</h2>
+        <p><strong>Issue:</strong> I don’t see the "Identify Your Seasonal Color" option when I right-click an image.</p>
+        <p><strong>Solution:</strong> Make sure FashionAtlas is installed and enabled. Go to chrome://extensions, check that FashionAtlas is toggled on, and refresh your browser.</p>
+
+        <p><strong>Issue:</strong> The color analysis doesn’t seem accurate.</p>
+        <p><strong>Solution:</strong> Try refreshing the page and right-clicking the image again. Ensure that the image is not heavily filtered or edited, as this can affect the color data.</p>
+
+        <p><strong>Issue:</strong> Permission error when trying to analyze an image.</p>
+        <p><strong>Solution:</strong> Verify that FashionAtlas has permission to access tabs and images. Go to chrome://extensions, click Details under FashionAtlas, and ensure all permissions are allowed.</p>
+
+        <h2>5. Privacy and Security</h2>
+        <p>FashionAtlas is committed to protecting your privacy:</p>
+        <ul>
+            <li><strong>No Data Collection:</strong> All data is processed locally on your device. FashionAtlas does not collect, share, or transmit any personal or usage data.</li>
+            <li><strong>Privacy Policy:</strong> For more information, please review our privacy policy.
+        </ul>
+
+        <h2>6. Contact and Support</h2>
+        <p>If you have questions or feedback that aren’t covered here, feel free to reach out to us:</p>
+        <p><strong>Email:</strong> 50tech50style@gmail.com</p>
+        <p>We aim to respond within 48 hours. Your feedback helps us improve FashionAtlas and better serve our community of users.</p>
+
+        <h2>7. Version History</h2>
+        <p><strong>Version 1.0 (November 2024):</strong> Initial release of FashionAtlas with color and fabric analysis features.</p>
+    </main>
+    <footer class="footer">
+        <p>&copy; 2024 FashionAtlas. All rights reserved.</p>
+    </footer>
+</body>
+</html>
